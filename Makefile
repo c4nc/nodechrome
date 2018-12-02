@@ -55,8 +55,8 @@ run-test:
 
 build-tag: build-full tag
 
-pushRepo:
-		git add . && git commit -m "Release: $(TARGET):$(VERSION)" && git push origin master
+push-repo:
+	git add . && git commit -m "Release: $(TARGET):$(VERSION)" && git push origin master
 
 tag: 
 	docker tag $(TARGET):$(LATEST) $(TARGET):$(VERSION)

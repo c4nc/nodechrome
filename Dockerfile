@@ -21,4 +21,4 @@ LABEL     org.label-schema.build-date=$BUILD_DATE \
           org.label-schema.vendor=C4nC \
           org.label-schema.url='https://who.c4nc.io/' \
           org.label-schema.schema-version=1.0 
-CMD ["/bin/sh", "-c"]
+ENTRYPOINT [ "/bin/sh", "-c"]
