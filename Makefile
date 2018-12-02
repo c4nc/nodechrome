@@ -1,6 +1,8 @@
 ACCOUNT = c4nc
 ARCH = alpine
 IMAGE = nodechrome
+SHELL = "/bin/sh"
+SHELL_INT = $(SHELL) "-i"
 TARGET = $(ACCOUNT)/$(IMAGE)
 VERSION = $(shell cat VERSION)-$(ARCH)
 LATEST = latest-$(ARCH)
@@ -8,9 +10,6 @@ TEST = test
 SQUASH = squash
 VCS_REF = $(shell git rev-parse --short HEAD)
 BUILD_DATE=$(shell date -u +"%Y-%m-%dT%H:%M:%SZ")
-#C-SHELL - Container shell type(to be placed in config)
-SHELL = "/bin/sh"
-SHELL_INT = $(SHELL) "-i"
 
 default: build
 
@@ -55,6 +54,9 @@ run-test:
 	docker run $(TARGET):$(TEST)
 
 build-tag: build-full tag
+
+pushRepo:
+		git add . && git commit -m "Release: $(TARGET):$(VERSION)" && git push origin master
 
 tag: 
 	docker tag $(TARGET):$(LATEST) $(TARGET):$(VERSION)
