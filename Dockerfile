@@ -1,5 +1,6 @@
 #BASE PKG INSTALL STAGE
 FROM node:11-alpine AS baseImage
+ARG VERSION
 RUN set -eux \
 && apk update \
 && apk upgrade \
@@ -7,9 +8,9 @@ RUN set -eux \
 && echo @edge http://nl.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories \
 && apk add --update --update-cache chromium@edge nss@edge ca-certificates \
 && rm -rf /usr/include /var/cache/apk/* /root/.node-gyp /usr/share/man /tmp/* \
+&& mkdir /app && chown node:node /app \
 && echo
 COPY config/etc/ /etc/chromium/
-ARG VERSION
 ARG BUILD_DATE
 ARG VCS_REF
 LABEL     org.label-schema.build-date=$BUILD_DATE \
