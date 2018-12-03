@@ -6,10 +6,14 @@ RUN set -eux \
 && apk upgrade \
 && echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories \
 && echo @edge http://nl.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories \
-&& apk add --update --update-cache chromium@edge nss@edge ca-certificates \
+&& apk add --update --update-cache chromium@edge nss@edge \ 
+  freetype@edge \
+  harfbuzz@edge \
+  ca-certificates  \
+&& apk del curl g++ gcc linux-headers make python \
 && rm -rf /usr/include /var/cache/apk/* /root/.node-gyp /usr/share/man /tmp/* \
 && mkdir /app && chown node:node /app \
-&& echo
+&& echo 
 COPY config/etc/ /etc/chromium/
 ARG BUILD_DATE
 ARG VCS_REF

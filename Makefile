@@ -4,7 +4,7 @@ IMAGE = nodechrome
 SHELL = "/bin/sh"
 SHELL_INT = $(SHELL) "-i"
 TARGET = $(ACCOUNT)/$(IMAGE)
-VERSION = $(shell cat VERSION)-$(ARCH)
+VERSION = v$(shell cat VERSION)-$(ARCH)
 LATEST = latest
 TEST = test
 SQUASH = squash
@@ -25,7 +25,8 @@ build:
 build-full:
 	@docker build \
 		-f "Dockerfile" \
-		--no-cache --rm \
+		--no-cache \
+		--rm \
 		--compress \
 		--build-arg VCS_REF=$(VCS_REF) \
   	--build-arg BUILD_DATE=$(BUILD_DATE) \
